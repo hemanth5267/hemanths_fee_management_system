@@ -82,16 +82,20 @@ document.getElementById('photoUpload').addEventListener('change', function(e) {
     };
     reader.readAsDataURL(file);
 });
-// Restore photo
+// Restore custom uploaded photo (overrides default only if user uploaded one)
 (function restorePhoto() {
     const saved = localStorage.getItem('adminPhoto');
     if (saved) {
         const img = document.getElementById('adminAvatar');
-        const fallback = document.getElementById('avatarFallback');
         img.src = saved;
         img.style.display = 'block';
-        fallback.style.display = 'none';
+        document.getElementById('avatarFallback').style.display = 'none';
     }
+    // Fallback if default image fails to load
+    document.getElementById('adminAvatar').addEventListener('error', function() {
+        this.style.display = 'none';
+        document.getElementById('avatarFallback').style.display = 'flex';
+    });
 })();
 
 /* ══════════════════════════════════════

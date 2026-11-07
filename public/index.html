@@ -23,17 +23,16 @@
   <!-- Admin Profile -->
   <div class="admin-profile">
     <div class="admin-avatar-wrap">
-      <img src="images/admin.png" alt="Hemanth" class="admin-avatar" id="adminAvatar"
-           onerror="this.style.display='none';document.getElementById('avatarFallback').style.display='flex'"/>
-      <div class="avatar-fallback" id="avatarFallback"><i class="fas fa-user"></i></div>
-      <label for="photoUpload" class="avatar-edit-btn" title="Upload your photo">
+      <img src="images/admin.png" alt="Hemanth" class="admin-avatar" id="adminAvatar"/>
+      <div class="avatar-fallback" id="avatarFallback" style="display:none"><i class="fas fa-user"></i></div>
+      <label for="photoUpload" class="avatar-edit-btn" title="Change photo">
         <i class="fas fa-camera"></i>
         <input type="file" id="photoUpload" accept="image/*" style="display:none"/>
       </label>
     </div>
     <div class="admin-info">
       <span class="admin-name">Hemanth</span>
-      <span class="admin-role">Administrator</span>
+      <span class="admin-role"><i class="fas fa-circle admin-online-dot"></i> Administrator</span>
     </div>
   </div>
 
