@@ -57,11 +57,11 @@ CREATE TABLE payments (
 -- ──────────────────────────────────────
 
 INSERT INTO students (name, class, rollno, phone, email, photo) VALUES
-('Hemanth Kumar', '10-A', 'R001', '9876543210', 'hemanth@example.com', 'images/students/hemanth.jpg'),
-('Priya Reddy',   '9-B',  'R002', '9876543211', 'priya@example.com',   'images/students/priya.svg'),
-('Rahul Kumar',   '11-C', 'R003', '9876543212', 'rahul@example.com',   'images/students/rahul.svg'),
-('Sneha Patel',   '10-B', 'R004', '9876543213', 'sneha@example.com',   'images/students/sneha.svg'),
-('Vikram Singh',  '12-A', 'R005', '9876543214', 'vikram@example.com',  'images/students/vikram.svg');
+('Arjun Sharma',  '10-A', 'R001', '9876543210', 'arjun@example.com',  'images/students/arjun.svg'),
+('Priya Reddy',   '9-B',  'R002', '9876543211', 'priya@example.com',  'images/students/priya.svg'),
+('Rahul Kumar',   '11-C', 'R003', '9876543212', 'rahul@example.com',  'images/students/rahul.svg'),
+('Sneha Patel',   '10-B', 'R004', '9876543213', 'sneha@example.com',  'images/students/sneha.svg'),
+('Vikram Singh',  '12-A', 'R005', '9876543214', 'vikram@example.com', 'images/students/vikram.svg');
 
 INSERT INTO fees (student_id, academic_year, fee_type, total_amount, due_date) VALUES
 (1, '2025-2026', 'Tuition Fee',    15000.00, '2025-07-31'),

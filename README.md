@@ -15,7 +15,8 @@ A modern, full-stack educational web application designed to streamline student 
 ### 🎨 Design & Aesthetic
 - **Theme:** Deep Royal Blue (`#0a1628`) & Luxury Gold (`#f59e0b`) school palette.
 - **Visual Illustrations:** Custom themed SVG hero banners on every section (School Campus, Graduation Students, Fee Invoicing, Payment Wallet, and Analytics Charts).
-- **Student Avatars:** Integrated student photo gallery, featuring real and vector avatars (including Hemanth's profile on Roll No `R001`).
+- **Admin Profile:** Features Hemanth's administrator portrait, status, and role in the primary navigation sidebar.
+- **Student Avatars:** Integrated student photo gallery featuring custom themed vector avatars for students (Arjun, Priya, Rahul, Sneha, Vikram).
 - **Interactive UI:** Smooth single-page navigation, responsive layout for desktop, tablet, and mobile, modal forms, and toast notifications.
 
 ---
@@ -188,14 +189,14 @@ hemanths_fee_management_system/
 │   ├── js/
 │   │   └── app.js               # Frontend application logic & API fetch layer
 │   ├── images/
-│   │   ├── admin-avatar.svg     # School Administrator crest
+│   │   ├── admin.png            # Hemanth Administrator photo
 │   │   ├── banner-dashboard.svg # Campus hero illustration
 │   │   ├── banner-students.svg  # Students hero illustration
 │   │   ├── banner-fees.svg      # Invoicing hero illustration
 │   │   ├── banner-payments.svg  # Payments hero illustration
 │   │   ├── banner-reports.svg   # Reports & Analytics hero illustration
 │   │   └── students/
-│   │       ├── hemanth.jpg      # Hemanth Kumar student portrait
+│   │       ├── arjun.svg        # Student avatar (Arjun)
 │   │       ├── priya.svg        # Student avatar (Priya)
 │   │       ├── rahul.svg        # Student avatar (Rahul)
 │   │       ├── sneha.svg        # Student avatar (Sneha)
