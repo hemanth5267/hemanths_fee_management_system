@@ -68,25 +68,14 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 /* ══════ ADMIN AVATAR ══════ */
-const adminPhotoInput = document.getElementById('photoUpload');
-if (adminPhotoInput) {
-    adminPhotoInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            const img = document.getElementById('adminAvatar');
-            if (img) img.src = ev.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-}
+// Clear any old local storage override so your photo always loads
+localStorage.removeItem('adminPhoto');
 const adminAvatarEl = document.getElementById('adminAvatar');
 if (adminAvatarEl) {
+    adminAvatarEl.src = 'images/admin.jpg';
+    adminAvatarEl.style.display = 'block';
     adminAvatarEl.addEventListener('error', function() {
-        this.style.display = 'none';
-        const fallback = document.getElementById('avatarFallback');
-        if (fallback) fallback.style.display = 'flex';
+        this.src = 'images/admin.png';
     });
 }
 
