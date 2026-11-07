@@ -22,7 +22,7 @@ router.get('/dashboard', async (req, res) => {
         // Recent payments
         const [recent_payments] = await db.query(`
             SELECT p.receipt_no, p.amount_paid, p.payment_date, p.payment_method,
-                   s.name AS student_name, f.fee_type
+                   s.name AS student_name, s.photo AS student_photo, f.fee_type
             FROM payments p
             JOIN fees f ON p.fee_id = f.fee_id
             JOIN students s ON f.student_id = s.student_id
@@ -72,7 +72,7 @@ router.get('/student/:id', async (req, res) => {
 router.get('/pending', async (req, res) => {
     try {
         const [rows] = await db.query(`
-            SELECT s.name, s.class, s.rollno, s.phone,
+            SELECT s.name, s.class, s.rollno, s.phone, s.photo AS student_photo,
                    f.fee_id, f.fee_type, f.academic_year, f.due_date, f.total_amount,
                    COALESCE(SUM(p.amount_paid),0) AS paid_amount,
                    (f.total_amount - COALESCE(SUM(p.amount_paid),0)) AS pending_amount

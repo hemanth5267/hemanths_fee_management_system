@@ -6,7 +6,7 @@ const db      = require('../db');
 router.get('/', async (req, res) => {
     try {
         const [rows] = await db.query(`
-            SELECT f.*, s.name AS student_name, s.class, s.rollno,
+            SELECT f.*, s.name AS student_name, s.class, s.rollno, s.photo AS student_photo,
                    COALESCE(SUM(p.amount_paid),0) AS paid_amount,
                    (f.total_amount - COALESCE(SUM(p.amount_paid),0)) AS pending_amount
             FROM fees f

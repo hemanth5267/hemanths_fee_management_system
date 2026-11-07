@@ -491,6 +491,75 @@ body {
 .toast.error   { background: linear-gradient(135deg, #ef4444, #dc2626); }
 .toast.info    { background: linear-gradient(135deg, var(--blue-500), var(--blue-400)); }
 
+/* ══════════════ STUDENT AVATARS & CELLS ══════════════ */
+.student-avatar-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--gold-400);
+  box-shadow: 0 2px 8px rgba(10,22,40,0.15);
+  vertical-align: middle;
+  background: var(--blue-100);
+}
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.student-cell-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--gold-400);
+  box-shadow: 0 2px 6px rgba(10,22,40,0.12);
+  flex-shrink: 0;
+  background: var(--blue-100);
+}
+.student-meta {
+  display: flex;
+  flex-direction: column;
+}
+.student-meta-name {
+  font-weight: 700;
+  color: var(--gray-900);
+}
+.student-meta-roll {
+  font-size: 0.72rem;
+  color: var(--gray-400);
+}
+.report-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.report-student-lg-img {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--gold-400);
+  box-shadow: 0 0 0 4px rgba(251,191,36,0.25);
+  background: var(--blue-700);
+}
+.report-header-text h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.report-header-text p {
+  font-size: 0.8rem;
+  color: var(--gold-300);
+}
+
 /* ══════════════ REPORT ══════════════ */
 .report-student-card {
   background: linear-gradient(135deg, var(--blue-900), var(--blue-700));

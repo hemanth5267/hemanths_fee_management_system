@@ -26,11 +26,12 @@ router.get('/:id', async (req, res) => {
 // POST create student
 router.post('/', async (req, res) => {
     try {
-        const { name, class: cls, rollno, phone, email } = req.body;
+        const { name, class: cls, rollno, phone, email, photo } = req.body;
         if (!name || !cls || !rollno) return res.status(400).json({ success: false, message: 'Name, class, and rollno are required' });
+        const studentPhoto = photo || 'images/students/rahul.svg';
         const [result] = await db.query(
-            'INSERT INTO students (name, class, rollno, phone, email) VALUES (?, ?, ?, ?, ?)',
-            [name, cls, rollno, phone, email]
+            'INSERT INTO students (name, class, rollno, phone, email, photo) VALUES (?, ?, ?, ?, ?, ?)',
+            [name, cls, rollno, phone, email, studentPhoto]
         );
         res.json({ success: true, message: 'Student added successfully', id: result.insertId });
     } catch (err) {
@@ -42,11 +43,18 @@ router.post('/', async (req, res) => {
 // PUT update student
 router.put('/:id', async (req, res) => {
     try {
-        const { name, class: cls, rollno, phone, email } = req.body;
-        await db.query(
-            'UPDATE students SET name=?, class=?, rollno=?, phone=?, email=? WHERE student_id=?',
-            [name, cls, rollno, phone, email, req.params.id]
-        );
+        const { name, class: cls, rollno, phone, email, photo } = req.body;
+        if (photo) {
+            await db.query(
+                'UPDATE students SET name=?, class=?, rollno=?, phone=?, email=?, photo=? WHERE student_id=?',
+                [name, cls, rollno, phone, email, photo, req.params.id]
+            );
+        } else {
+            await db.query(
+                'UPDATE students SET name=?, class=?, rollno=?, phone=?, email=? WHERE student_id=?',
+                [name, cls, rollno, phone, email, req.params.id]
+            );
+        }
         res.json({ success: true, message: 'Student updated successfully' });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });

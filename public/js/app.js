@@ -67,36 +67,28 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
     });
 });
 
-/* ══════ PHOTO UPLOAD ══════ */
-document.getElementById('photoUpload').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-        const img = document.getElementById('adminAvatar');
-        const fallback = document.getElementById('avatarFallback');
-        img.src = ev.target.result;
-        img.style.display = 'block';
-        fallback.style.display = 'none';
-        localStorage.setItem('adminPhoto', ev.target.result);
-    };
-    reader.readAsDataURL(file);
-});
-// Restore custom uploaded photo (overrides default only if user uploaded one)
-(function restorePhoto() {
-    const saved = localStorage.getItem('adminPhoto');
-    if (saved) {
-        const img = document.getElementById('adminAvatar');
-        img.src = saved;
-        img.style.display = 'block';
-        document.getElementById('avatarFallback').style.display = 'none';
-    }
-    // Fallback if default image fails to load
-    document.getElementById('adminAvatar').addEventListener('error', function() {
-        this.style.display = 'none';
-        document.getElementById('avatarFallback').style.display = 'flex';
+/* ══════ ADMIN AVATAR ══════ */
+const adminPhotoInput = document.getElementById('photoUpload');
+if (adminPhotoInput) {
+    adminPhotoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            const img = document.getElementById('adminAvatar');
+            if (img) img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
     });
-})();
+}
+const adminAvatarEl = document.getElementById('adminAvatar');
+if (adminAvatarEl) {
+    adminAvatarEl.addEventListener('error', function() {
+        this.style.display = 'none';
+        const fallback = document.getElementById('avatarFallback');
+        if (fallback) fallback.style.display = 'flex';
+    });
+}
 
 /* ══════════════════════════════════════
    DASHBOARD
@@ -125,7 +117,12 @@ async function loadDashboard() {
         }
         tbody.innerHTML = d.recent_payments.map(p => `
             <tr>
-                <td><strong>${esc(p.student_name)}</strong></td>
+                <td>
+                    <div class="student-cell">
+                        <img src="${esc(p.student_photo || 'images/students/rahul.svg')}" class="student-cell-img" alt="${esc(p.student_name)}"/>
+                        <strong>${esc(p.student_name)}</strong>
+                    </div>
+                </td>
                 <td>${esc(p.fee_type)}</td>
                 <td><strong>₹${fmt(p.amount_paid)}</strong></td>
                 <td><span class="badge badge-paid">${esc(p.payment_method)}</span></td>
@@ -156,12 +153,15 @@ async function loadStudents() {
 function renderStudents(list) {
     const tbody = document.getElementById('studentsTbody');
     if (!list.length) {
-        tbody.innerHTML = '<tr><td colspan="7" class="loading-row">No students found. Add one!</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="loading-row">No students found. Add one!</td></tr>';
         return;
     }
     tbody.innerHTML = list.map((s, i) => `
         <tr>
             <td>${i + 1}</td>
+            <td>
+                <img src="${esc(s.photo || 'images/students/rahul.svg')}" class="student-avatar-img" alt="${esc(s.name)}" onerror="this.src='images/students/rahul.svg'"/>
+            </td>
             <td><strong>${esc(s.name)}</strong></td>
             <td>${esc(s.class)}</td>
             <td><code>${esc(s.rollno)}</code></td>
@@ -186,11 +186,12 @@ async function submitStudent(e) {
     e.preventDefault();
     const id = document.getElementById('studentId').value;
     const payload = {
-        name:  document.getElementById('sName').value,
-        class: document.getElementById('sClass').value,
+        name:   document.getElementById('sName').value,
+        class:  document.getElementById('sClass').value,
         rollno: document.getElementById('sRollno').value,
-        phone: document.getElementById('sPhone').value,
-        email: document.getElementById('sEmail').value
+        phone:  document.getElementById('sPhone').value,
+        email:  document.getElementById('sEmail').value,
+        photo:  document.getElementById('sPhoto')?.value || 'images/students/rahul.svg'
     };
     try {
         const url    = id ? `${API}/api/students/${id}` : `${API}/api/students`;
@@ -214,6 +215,9 @@ async function editStudent(id) {
     document.getElementById('sRollno').value    = s.rollno;
     document.getElementById('sPhone').value     = s.phone || '';
     document.getElementById('sEmail').value     = s.email || '';
+    if (document.getElementById('sPhoto')) {
+        document.getElementById('sPhoto').value = s.photo || 'images/students/rahul.svg';
+    }
     openModal('studentModal');
 }
 
@@ -260,7 +264,15 @@ function renderFees(list) {
 
         return `<tr>
             <td>${i + 1}</td>
-            <td><strong>${esc(f.student_name)}</strong></td>
+            <td>
+                <div class="student-cell">
+                    <img src="${esc(f.student_photo || 'images/students/rahul.svg')}" class="student-cell-img" alt="${esc(f.student_name)}"/>
+                    <div class="student-meta">
+                        <span class="student-meta-name">${esc(f.student_name)}</span>
+                        <span class="student-meta-roll">${esc(f.rollno)}</span>
+                    </div>
+                </div>
+            </td>
             <td>${esc(f.class)}</td>
             <td>${esc(f.academic_year)}</td>
             <td>${esc(f.fee_type)}</td>
@@ -364,7 +376,15 @@ function renderPayments(list) {
         <tr>
             <td>${i + 1}</td>
             <td><code>${esc(p.receipt_no)}</code></td>
-            <td><strong>${esc(p.student_name)}</strong></td>
+            <td>
+                <div class="student-cell">
+                    <img src="${esc(p.student_photo || 'images/students/rahul.svg')}" class="student-cell-img" alt="${esc(p.student_name)}"/>
+                    <div class="student-meta">
+                        <span class="student-meta-name">${esc(p.student_name)}</span>
+                        <span class="student-meta-roll">${esc(p.rollno || '')}</span>
+                    </div>
+                </div>
+            </td>
             <td>${esc(p.fee_type)}</td>
             <td><strong>₹${fmt(p.amount_paid)}</strong></td>
             <td><span class="badge badge-paid">${esc(p.payment_method)}</span></td>
@@ -455,6 +475,15 @@ async function loadStudentReport() {
 
         // Student card
         document.getElementById('reportStudentCard').innerHTML = `
+            <div style="grid-column: 1 / -1;">
+                <div class="report-profile-header">
+                    <img src="${esc(student.photo || 'images/students/rahul.svg')}" class="report-student-lg-img" alt="${esc(student.name)}" onerror="this.src='images/students/rahul.svg'"/>
+                    <div class="report-header-text">
+                        <h3>${esc(student.name)}</h3>
+                        <p>Class: ${esc(student.class)} | Roll No: ${esc(student.rollno)} | Contact: ${esc(student.phone || 'N/A')}</p>
+                    </div>
+                </div>
+            </div>
             <div class="report-info-item"><label>Student Name</label><span>${esc(student.name)}</span></div>
             <div class="report-info-item"><label>Class</label><span>${esc(student.class)}</span></div>
             <div class="report-info-item"><label>Roll No</label><span>${esc(student.rollno)}</span></div>
@@ -518,7 +547,12 @@ async function loadPendingReport() {
         }
         tbody.innerHTML = rows.map(r => `
             <tr>
-                <td><strong>${esc(r.name)}</strong></td>
+                <td>
+                    <div class="student-cell">
+                        <img src="${esc(r.student_photo || 'images/students/rahul.svg')}" class="student-cell-img" alt="${esc(r.name)}"/>
+                        <strong>${esc(r.name)}</strong>
+                    </div>
+                </td>
                 <td>${esc(r.class)}</td>
                 <td>${esc(r.rollno)}</td>
                 <td>${esc(r.fee_type)}</td>
