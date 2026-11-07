@@ -1,4 +1,4 @@
-# 🎓 Hemanth's Fee Management System
+# Hemanth's Fee Management System
 
 A modern, full-stack educational web application designed to streamline student fee management, track tuition dues, record payment transactions, and generate financial reports.
 
@@ -8,11 +8,11 @@ A modern, full-stack educational web application designed to streamline student 
 
 ---
 
-## 🌐 About the Website
+## About the Website
 
 **Hemanth's Fee Management System** (`hemanths_fee_management_system`) is an aesthetic, single-page web portal created for school administrators and accountants. It replaces paper ledgers and fragmented spreadsheets with a unified digital platform for real-time tracking of student fee commitments and collections.
 
-### 🎨 Design & Aesthetic
+### Design & Aesthetic
 - **Theme:** Deep Royal Blue (`#0a1628`) & Luxury Gold (`#f59e0b`) school palette.
 - **Visual Illustrations:** Custom themed SVG hero banners on every section (School Campus, Graduation Students, Fee Invoicing, Payment Wallet, and Analytics Charts).
 - **Admin Profile:** Features Hemanth's administrator portrait, status, and role in the primary navigation sidebar.
@@ -21,9 +21,9 @@ A modern, full-stack educational web application designed to streamline student 
 
 ---
 
-## 🖥️ Website Sections & Capabilities
+## Website Sections & Capabilities
 
-### 1. 📊 Interactive Dashboard
+### 1. Interactive Dashboard
 - **Live Financial Metric Cards:**
   - **Total Students Enrolled:** Active student count.
   - **Total Fees Assigned:** Total fee invoices issued.
@@ -32,28 +32,28 @@ A modern, full-stack educational web application designed to streamline student 
 - **Collection Progress Bar:** Visual percentage gauge tracking fee realization against targets.
 - **Recent Payments Ledger:** Real-time log of the latest transactions with student avatars, payment methods, and receipt IDs.
 
-### 2. 👨‍🎓 Student Management
+### 2. Student Management
 - **Student Directory:** Browse, search, and manage student records in real time.
 - **Profile Details:** Student photo, Full Name, Class (e.g., `10-A`), Roll Number, Phone Number, and Email.
 - **CRUD Controls:** Add new students, edit existing student profiles, and safely remove student records with cascading database integrity.
 
-### 3. 📄 Fee Assignment
+### 3. Fee Assignment
 - **Custom Fee Allocation:** Assign specific fee types (`Tuition Fee`, `Transport Fee`, `Lab Fee`, `Sports Fee`, `Library Fee`, `Exam Fee`, `Miscellaneous`) per academic year.
 - **Automated Balance Tracking:** Calculates `Total Amount`, `Paid Amount`, and remaining `Pending Amount` dynamically.
 - **Status Badges:** Real-time status tags (`Paid`, `Partial`, or `Pending`) with due date alerts.
 
-### 4. 💳 Payment Processing
+### 4. Payment Processing
 - **Transaction Recording:** Log payments toward assigned fees with validation preventing overpayments.
 - **Payment Modes:** Supports `Cash`, `Online`, `UPI`, `Cheque`, and `Demand Draft (DD)`.
 - **Receipt Generator:** Auto-generates formal sequential receipt vouchers (e.g., `RCP-2025-001`).
 
-### 5. 📑 Reports & Financial Statements
+### 5. Reports & Financial Statements
 - **Individual Student Fee Statement:** Select any student to generate a comprehensive ledger showing profile information, all assigned fee heads, and complete payment transaction history.
 - **Pending Payments Report:** Dedicated defaulters report listing all students with unpaid or partially paid fees alongside their due dates for proactive follow-ups.
 
 ---
 
-## 🗄️ Database Architecture (`school_fee_db`)
+## Database Architecture (`school_fee_db`)
 
 The system runs on a relational MySQL database adhering to 3NF standards:
 
@@ -110,7 +110,7 @@ The system runs on a relational MySQL database adhering to 3NF standards:
 
 ---
 
-## ⚡ REST API Reference
+## REST API Reference
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -133,11 +133,11 @@ The system runs on a relational MySQL database adhering to 3NF standards:
 
 ---
 
-## 🚀 Installation & Running Locally
+## Installation and Setup
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v16 or higher)
-- [MySQL Server](https://dev.mysql.com/downloads/mysql/) & [MySQL Workbench](https://www.mysql.com/products/workbench/)
+- [MySQL Server](https://dev.mysql.com/downloads/mysql/) and [MySQL Workbench](https://www.mysql.com/products/workbench/)
 - [Git](https://git-scm.com/)
 
 ### Step 1: Clone the Repository
@@ -179,7 +179,7 @@ http://localhost:3000
 
 ---
 
-## 📂 Project Directory Structure
+## Project Directory Structure
 
 ```
 hemanths_fee_management_system/
@@ -218,7 +218,7 @@ hemanths_fee_management_system/
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Hemanth**  
 - **GitHub:** [@hemanth5267](https://github.com/hemanth5267)  

@@ -25,6 +25,6 @@ app.get('*', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`\n🎓 Hemanth's Fee Management System`);
-    console.log(`🚀 Server running at http://localhost:${PORT}\n`);
+    console.log(`\nHemanth's Fee Management System`);
+    console.log(`Server running at http://localhost:${PORT}\n`);
 });
