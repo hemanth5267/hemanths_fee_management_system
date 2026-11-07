@@ -1,4 +1,4 @@
-# 🎓 School Fee Management System — Hemanth
+# 🎓 Hemanth's Fee Management System
 
 A full-stack web application to manage student fee details and payment records built with **HTML, CSS, JavaScript, Express.js and MySQL**.
 
