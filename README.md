@@ -16,7 +16,7 @@ A modern, full-stack educational web application designed to streamline student 
 - **Theme:** Deep Royal Blue (`#0a1628`) & Luxury Gold (`#f59e0b`) school palette.
 - **Visual Illustrations:** Custom themed SVG hero banners on every section (School Campus, Graduation Students, Fee Invoicing, Payment Wallet, and Analytics Charts).
 - **Admin Profile:** Features Hemanth's administrator portrait, status, and role in the primary navigation sidebar.
-- **Student Avatars:** Integrated student photo gallery featuring custom themed vector avatars for students (Arjun, Priya, Rahul, Sneha, Vikram).
+- **Student Avatars:** Integrated student photo gallery featuring custom themed vector avatars for South Indian students (Karthik, Priya, Sai Krishna, Ananya, Vigneshwaran, Meenakshi, Praveen, Keerthi).
 - **Interactive UI:** Smooth single-page navigation, responsive layout for desktop, tablet, and mobile, modal forms, and toast notifications.
 
 ---
