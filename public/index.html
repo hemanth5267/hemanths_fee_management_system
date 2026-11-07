@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>School Fee Management System — Hemanth</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ───────────── SIDEBAR ───────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+    <div class="brand-text">
+      <span class="brand-title">EduFee</span>
+      <span class="brand-sub">Management System</span>
+    </div>
+  </div>
+
+  <!-- Admin Profile -->
+  <div class="admin-profile">
+    <div class="admin-avatar-wrap">
+      <img src="images/admin.png" alt="Hemanth" class="admin-avatar" id="adminAvatar"
+           onerror="this.style.display='none';document.getElementById('avatarFallback').style.display='flex'"/>
+      <div class="avatar-fallback" id="avatarFallback"><i class="fas fa-user"></i></div>
+      <label for="photoUpload" class="avatar-edit-btn" title="Upload your photo">
+        <i class="fas fa-camera"></i>
+        <input type="file" id="photoUpload" accept="image/*" style="display:none"/>
+      </label>
+    </div>
+    <div class="admin-info">
+      <span class="admin-name">Hemanth</span>
+      <span class="admin-role">Administrator</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="nav-item active" onclick="showSection('dashboard')" data-section="dashboard">
+      <i class="fas fa-th-large"></i><span>Dashboard</span>
+    </a>
+    <a class="nav-item" onclick="showSection('students')" data-section="students">
+      <i class="fas fa-user-graduate"></i><span>Students</span>
+    </a>
+    <a class="nav-item" onclick="showSection('fees')" data-section="fees">
+      <i class="fas fa-file-invoice-dollar"></i><span>Fee Assignment</span>
+    </a>
+    <a class="nav-item" onclick="showSection('payments')" data-section="payments">
+      <i class="fas fa-money-bill-wave"></i><span>Payments</span>
+    </a>
+    <a class="nav-item" onclick="showSection('reports')" data-section="reports">
+      <i class="fas fa-chart-bar"></i><span>Reports</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <i class="fas fa-shield-alt"></i>
+    <span>School Fee Management v1.0</span>
+  </div>
+</aside>
+
+<!-- ───────────── MAIN CONTENT ───────────── -->
+<div class="main-wrap">
+
+  <!-- TOP NAVBAR -->
+  <header class="topbar">
+    <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <div class="topbar-title">
+      <h1 id="pageTitle">Dashboard</h1>
+      <span class="breadcrumb"><i class="fas fa-home"></i> Home / <span id="breadSub">Dashboard</span></span>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-date" id="topbarDate"></div>
+      <div class="topbar-badge"><i class="fas fa-bell"></i></div>
+    </div>
+  </header>
+
+  <main class="content" id="mainContent">
+
+    <!-- ══════ DASHBOARD ══════ -->
+    <section id="sec-dashboard" class="section active">
+      <div class="section-header">
+        <h2>Welcome back, <span class="highlight">Hemanth</span> 👋</h2>
+        <p class="section-desc">Here's what's happening with your school fees today.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <span class="stat-num" id="statStudents">—</span>
+            <span class="stat-label">Total Students</span>
+          </div>
+          <div class="stat-sparkline"></div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-icon"><i class="fas fa-rupee-sign"></i></div>
+          <div class="stat-info">
+            <span class="stat-num" id="statFees">—</span>
+            <span class="stat-label">Total Fees Assigned</span>
+          </div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-info">
+            <span class="stat-num" id="statPaid">—</span>
+            <span class="stat-label">Total Collected</span>
+          </div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-icon"><i class="fas fa-exclamation-circle"></i></div>
+          <div class="stat-info">
+            <span class="stat-num" id="statPending">—</span>
+            <span class="stat-label">Pending Amount</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="collection-progress card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-line"></i> Collection Progress</h3>
+        </div>
+        <div class="card-body">
+          <div class="progress-info">
+            <span>Fee Collected</span>
+            <span id="progressPct">0%</span>
+          </div>
+          <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+        </div>
+      </div>
+
+      <!-- Recent Payments -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-history"></i> Recent Payments</h3>
+          <button class="btn-link" onclick="showSection('payments')">View All →</button>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table class="data-table" id="recentPaymentsTable">
+              <thead><tr><th>Student</th><th>Fee Type</th><th>Amount</th><th>Method</th><th>Date</th><th>Receipt</th></tr></thead>
+              <tbody id="recentPaymentsTbody"><tr><td colspan="6" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ STUDENTS ══════ -->
+    <section id="sec-students" class="section">
+      <div class="section-header flex-between">
+        <div>
+          <h2>Student Management</h2>
+          <p class="section-desc">Add, edit and manage student records.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('studentModal')">
+          <i class="fas fa-plus"></i> Add Student
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-list"></i> All Students</h3>
+          <input type="text" class="search-input" placeholder="🔍 Search students..." id="studentSearch" oninput="filterStudents()"/>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Name</th><th>Class</th><th>Roll No</th><th>Phone</th><th>Email</th><th>Actions</th></tr></thead>
+              <tbody id="studentsTbody"><tr><td colspan="7" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ FEES ══════ -->
+    <section id="sec-fees" class="section">
+      <div class="section-header flex-between">
+        <div>
+          <h2>Fee Assignment</h2>
+          <p class="section-desc">Assign and manage fee records for students.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('feeModal')">
+          <i class="fas fa-plus"></i> Assign Fee
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-file-invoice-dollar"></i> All Fees</h3>
+          <input type="text" class="search-input" placeholder="🔍 Search fees..." id="feeSearch" oninput="filterFees()"/>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Student</th><th>Class</th><th>Academic Year</th><th>Fee Type</th><th>Total</th><th>Paid</th><th>Pending</th><th>Due Date</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="feesTbody"><tr><td colspan="11" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ PAYMENTS ══════ -->
+    <section id="sec-payments" class="section">
+      <div class="section-header flex-between">
+        <div>
+          <h2>Payment Records</h2>
+          <p class="section-desc">Record and track all fee payments.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('paymentModal')">
+          <i class="fas fa-plus"></i> Record Payment
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-money-bill-wave"></i> All Payments</h3>
+          <input type="text" class="search-input" placeholder="🔍 Search payments..." id="paymentSearch" oninput="filterPayments()"/>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Receipt No</th><th>Student</th><th>Fee Type</th><th>Amount Paid</th><th>Method</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="paymentsTbody"><tr><td colspan="8" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ REPORTS ══════ -->
+    <section id="sec-reports" class="section">
+      <div class="section-header">
+        <h2>Fee Reports</h2>
+        <p class="section-desc">Generate and view detailed student fee reports.</p>
+      </div>
+
+      <!-- Student Report Search -->
+      <div class="card">
+        <div class="card-header"><h3><i class="fas fa-user-circle"></i> Student Fee Report</h3></div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Select Student</label>
+              <select id="reportStudentSelect" class="form-control"></select>
+            </div>
+            <div class="form-group align-end">
+              <button class="btn btn-primary" onclick="loadStudentReport()"><i class="fas fa-search"></i> Generate Report</button>
+            </div>
+          </div>
+          <div id="studentReportResult" style="display:none">
+            <div class="report-student-card" id="reportStudentCard"></div>
+            <div class="report-fee-table" id="reportFeeTable"></div>
+            <div class="report-payment-table" id="reportPaymentTable"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Report -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-exclamation-triangle"></i> Pending Payments Report</h3>
+          <button class="btn btn-outline" onclick="loadPendingReport()"><i class="fas fa-sync"></i> Refresh</button>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Class</th><th>Roll No</th><th>Fee Type</th><th>Academic Year</th><th>Total</th><th>Paid</th><th>Pending</th><th>Due Date</th></tr></thead>
+              <tbody id="pendingTbody"><tr><td colspan="9" class="loading-row"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- Student Modal -->
+<div class="modal-overlay" id="studentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="studentModalTitle"><i class="fas fa-user-graduate"></i> Add Student</h3>
+      <button class="modal-close" onclick="closeModal('studentModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="studentForm" onsubmit="submitStudent(event)">
+        <input type="hidden" id="studentId"/>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="sName" class="form-control" placeholder="e.g. Arjun Sharma" required/>
+          </div>
+          <div class="form-group">
+            <label>Class <span class="req">*</span></label>
+            <input type="text" id="sClass" class="form-control" placeholder="e.g. 10-A" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Roll Number <span class="req">*</span></label>
+            <input type="text" id="sRollno" class="form-control" placeholder="e.g. R001" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" id="sPhone" class="form-control" placeholder="e.g. 9876543210"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="sEmail" class="form-control" placeholder="e.g. student@example.com"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('studentModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Fee Modal -->
+<div class="modal-overlay" id="feeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-file-invoice-dollar"></i> Assign Fee</h3>
+      <button class="modal-close" onclick="closeModal('feeModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="feeForm" onsubmit="submitFee(event)">
+        <input type="hidden" id="feeId"/>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Student <span class="req">*</span></label>
+            <select id="fStudentId" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label>Academic Year <span class="req">*</span></label>
+            <input type="text" id="fAcademicYear" class="form-control" placeholder="e.g. 2025-2026" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fee Type <span class="req">*</span></label>
+            <select id="fFeeType" class="form-control" required>
+              <option value="">Select type</option>
+              <option>Tuition Fee</option>
+              <option>Transport Fee</option>
+              <option>Lab Fee</option>
+              <option>Sports Fee</option>
+              <option>Library Fee</option>
+              <option>Exam Fee</option>
+              <option>Miscellaneous</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Total Amount (₹) <span class="req">*</span></label>
+            <input type="number" id="fAmount" class="form-control" placeholder="e.g. 15000" step="0.01" min="1" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Due Date <span class="req">*</span></label>
+          <input type="date" id="fDueDate" class="form-control" required/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('feeModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Assign Fee</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fas fa-money-bill-wave"></i> Record Payment</h3>
+      <button class="modal-close" onclick="closeModal('paymentModal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="paymentForm" onsubmit="submitPayment(event)">
+        <div class="form-group">
+          <label>Fee Record <span class="req">*</span></label>
+          <select id="pFeeId" class="form-control" required></select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Amount Paid (₹) <span class="req">*</span></label>
+            <input type="number" id="pAmount" class="form-control" placeholder="e.g. 5000" step="0.01" min="1" required/>
+          </div>
+          <div class="form-group">
+            <label>Payment Date <span class="req">*</span></label>
+            <input type="date" id="pDate" class="form-control" required/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Payment Method <span class="req">*</span></label>
+            <select id="pMethod" class="form-control" required>
+              <option value="">Select method</option>
+              <option>Cash</option>
+              <option>Online</option>
+              <option>Cheque</option>
+              <option>DD</option>
+              <option>UPI</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Receipt No <span class="req">*</span></label>
+            <input type="text" id="pReceiptNo" class="form-control" placeholder="e.g. RCP-2025-010" required/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('paymentModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Record Payment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
