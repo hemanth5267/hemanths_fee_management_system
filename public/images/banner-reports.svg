@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" fill="none">
+  <rect width="520" height="160" fill="url(#repGrad)"/>
+  <defs>
+    <linearGradient id="repGrad" x1="0" y1="0" x2="520" y2="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#112952"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background blobs -->
+  <circle cx="480" cy="30"  r="70" fill="#1e4d8c" opacity=".2"/>
+  <circle cx="40"  cy="140" r="55" fill="#1e4d8c" opacity=".2"/>
+
+  <!-- Bar Chart (center-left) -->
+  <!-- Base line -->
+  <line x1="80" y1="140" x2="320" y2="140" stroke="#2563b0" stroke-width="1.5"/>
+  <line x1="80" y1="30"  x2="80"  y2="140" stroke="#2563b0" stroke-width="1.5"/>
+  <!-- Y grid lines -->
+  <line x1="80"  y1="60"  x2="320" y2="60"  stroke="#1e4d8c" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="80"  y1="90"  x2="320" y2="90"  stroke="#1e4d8c" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="80"  y1="120" x2="320" y2="120" stroke="#1e4d8c" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Bars -->
+  <rect x="100" y="80"  width="30" height="60" fill="url(#bar1)" rx="4"/>
+  <rect x="145" y="55"  width="30" height="85" fill="url(#bar2)" rx="4"/>
+  <rect x="190" y="95"  width="30" height="45" fill="url(#bar1)" rx="4" opacity=".8"/>
+  <rect x="235" y="45"  width="30" height="95" fill="url(#bar2)" rx="4"/>
+  <rect x="280" y="70"  width="30" height="70" fill="url(#bar1)" rx="4" opacity=".9"/>
+  <!-- Value labels on bars -->
+  <text x="115" y="76"  font-family="Arial" font-size="7" fill="#fbbf24" text-anchor="middle">12k</text>
+  <text x="160" y="51"  font-family="Arial" font-size="7" fill="#fbbf24" text-anchor="middle">18k</text>
+  <text x="205" y="91"  font-family="Arial" font-size="7" fill="#fbbf24" text-anchor="middle">8k</text>
+  <text x="250" y="41"  font-family="Arial" font-size="7" fill="#fbbf24" text-anchor="middle">21k</text>
+  <text x="295" y="66"  font-family="Arial" font-size="7" fill="#fbbf24" text-anchor="middle">15k</text>
+  <defs>
+    <linearGradient id="bar1" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#3b82d4"/>
+      <stop offset="100%" stop-color="#1e4d8c"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <!-- X labels -->
+  <text x="115" y="152" font-family="Arial" font-size="7" fill="#94a3b8" text-anchor="middle">Jul</text>
+  <text x="160" y="152" font-family="Arial" font-size="7" fill="#94a3b8" text-anchor="middle">Aug</text>
+  <text x="205" y="152" font-family="Arial" font-size="7" fill="#94a3b8" text-anchor="middle">Sep</text>
+  <text x="250" y="152" font-family="Arial" font-size="7" fill="#94a3b8" text-anchor="middle">Oct</text>
+  <text x="295" y="152" font-family="Arial" font-size="7" fill="#94a3b8" text-anchor="middle">Nov</text>
+
+  <!-- Donut chart (right) -->
+  <!-- Outer ring -->
+  <circle cx="420" cy="85" r="55" stroke="#1e4d8c" stroke-width="2" fill="none"/>
+  <!-- Paid arc ~70% = 252deg -->
+  <circle cx="420" cy="85" r="40" stroke="#f59e0b"  stroke-width="18" fill="none"
+          stroke-dasharray="176 75" stroke-dashoffset="-20" stroke-linecap="round"/>
+  <!-- Pending arc ~30% -->
+  <circle cx="420" cy="85" r="40" stroke="#3b82d4"  stroke-width="18" fill="none"
+          stroke-dasharray="75 176" stroke-dashoffset="-196" stroke-linecap="round"/>
+  <!-- Center label -->
+  <circle cx="420" cy="85" r="22" fill="#0a1628"/>
+  <text x="420" y="82" font-family="Arial" font-size="10" font-weight="bold" fill="#fbbf24" text-anchor="middle">70%</text>
+  <text x="420" y="94" font-family="Arial" font-size="6"  fill="#94a3b8" text-anchor="middle">COLLECTED</text>
+
+  <!-- Legend -->
+  <rect x="358" y="148" width="10" height="6" fill="#f59e0b" rx="1"/>
+  <text x="372" y="154" font-family="Arial" font-size="7" fill="#94a3b8">Paid</text>
+  <rect x="398" y="148" width="10" height="6" fill="#3b82d4" rx="1"/>
+  <text x="412" y="154" font-family="Arial" font-size="7" fill="#94a3b8">Pending</text>
+
+  <!-- Trend line on chart -->
+  <polyline points="115,80 160,55 205,95 250,45 295,70" stroke="#22c55e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
+  <circle cx="115" cy="80" r="3" fill="#22c55e" opacity=".8"/>
+  <circle cx="160" cy="55" r="3" fill="#22c55e" opacity=".8"/>
+  <circle cx="205" cy="95" r="3" fill="#22c55e" opacity=".8"/>
+  <circle cx="250" cy="45" r="3" fill="#22c55e" opacity=".8"/>
+  <circle cx="295" cy="70" r="3" fill="#22c55e" opacity=".8"/>
+
+  <!-- Sparkles -->
+  <text x="30"  y="40"  font-family="Arial" font-size="14" fill="#fbbf24" opacity=".3">✦</text>
+  <text x="490" y="140" font-family="Arial" font-size="10" fill="#fbbf24" opacity=".3">✦</text>
+</svg>
